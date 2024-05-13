@@ -8,7 +8,9 @@ const TravalUniverse = () => {
 
   return (
     <div>
-      <h3>Places Of Universe</h3>
+      <h3>
+        <u>Nested Array Data</u>
+      </h3>
       <ol>
         {planets.map((place) => (
           <PlanetsPlaces key={place.id} place={place}>
