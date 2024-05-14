@@ -2,7 +2,7 @@ import React from "react";
 
 const PlanetsPlaces = ({ place }) => {
   const childPlaces = place.childPlaces;
-  console.log(childPlaces);
+ 
 
   return (
     <li>
