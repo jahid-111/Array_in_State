@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 
-const MainTask = () => {
+const MainTask = ({ onAddTask }) => {
+  const [inputValue, setInpuValue] = useState("");
+
+  const handleAddButtonTask = (e) => {
+    setInpuValue(e.target.value);
+  };
   return (
     <div>
-      <input type="text" name="" id="" />
-      <button>ADD</button>
+      <input value={inputValue} onChange={handleAddButtonTask} />
+      <button
+        onClick={() => {
+          setInpuValue("");
+          onAddTask(inputValue);
+        }}
+      >
+        ADD
+      </button>
     </div>
   );
 };

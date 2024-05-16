@@ -10,6 +10,42 @@ const initialTasks = [
 
 const AddTask = () => {
   const [tasks, setTasks] = useState(initialTasks);
+
+  const nextId = (data) => {
+    const maxId = data.reduce((prv, current) =>
+      prv && prv.id > current.id ? prv.id : current.id
+    );
+    return maxId + 1;
+  };
+
+  // console.log(nextId(tasks))
+  const handleAddTask = (taskText) => {
+    setTasks([
+      ...tasks,
+      {
+        id: nextId(tasks),
+        text: taskText,
+        done: false,
+      },
+    ]);
+  };
+
+  const handleChangeTask = (task) => {
+    const nextTask = tasks.map((t) => {
+      if (t.id === task.id) {
+        return task;
+      } else {
+        return t;
+      }
+    });
+    setTasks(nextTask);
+  };
+
+  const handleDeleteTask = (taskId) => {
+    const deleteask = tasks.filter((dlt) => dlt.id !== taskId);
+    setTasks(deleteask);
+  };
+
   return (
     <div style={{ border: "2px solid green", margin: "20px" }}>
       <h2>
@@ -17,9 +53,13 @@ const AddTask = () => {
         Extracting State Logic into a Reducer <br />
         -Tasks Project
       </h2>
-      <MainTask></MainTask>
+      <MainTask onAddTask={handleAddTask}></MainTask>
 
-      <TaskList tasks={tasks}></TaskList>
+      <TaskList
+        tasks={tasks}
+        onChangeTask={handleChangeTask}
+        onDeleteTask={handleDeleteTask}
+      ></TaskList>
     </div>
   );
 };

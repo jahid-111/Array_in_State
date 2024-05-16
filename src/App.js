@@ -7,12 +7,7 @@ import AddTask from "./statelLogic/AddTask";
 function App() {
   return (
     <div className="App">
-
       <AddTask></AddTask>
-
-
-
-
       <Accordion></Accordion>
       <Universe></Universe>
       <TravalUniverse></TravalUniverse>
