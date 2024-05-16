@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import MainTask from "./MainTask";
 import TaskList from "./TaskList";
+import taskReducer from "./reducers/taskBusinessLogic";
 
 const initialTasks = [
   { id: 0, text: "Visit Kafka Museum", done: true },
@@ -9,7 +10,8 @@ const initialTasks = [
 ];
 
 const AddTask = () => {
-  const [tasks, setTasks] = useState(initialTasks);
+  const [tasks, dispatch] = useReducer(taskReducer, initialTasks);
+  console.log(tasks);
 
   const nextId = (data) => {
     const maxId = data.reduce((prv, current) =>
@@ -20,30 +22,26 @@ const AddTask = () => {
 
   // console.log(nextId(tasks))
   const handleAddTask = (taskText) => {
-    setTasks([
-      ...tasks,
-      {
-        id: nextId(tasks),
-        text: taskText,
-        done: false,
-      },
-    ]);
+    dispatch({
+      type: "Added_Task",
+      taskText,
+      id: nextId(tasks),
+    });
   };
 
   const handleChangeTask = (task) => {
-    const nextTask = tasks.map((t) => {
-      if (t.id === task.id) {
-        return task;
-      } else {
-        return t;
-      }
+    dispatch({
+      type: "Edit_Task",
+      task,
     });
-    setTasks(nextTask);
+    console.log(task);
   };
 
   const handleDeleteTask = (taskId) => {
-    const deleteask = tasks.filter((dlt) => dlt.id !== taskId);
-    setTasks(deleteask);
+    dispatch({
+      type: "Delete_This_Task",
+      id: taskId,
+    });
   };
 
   return (
@@ -54,7 +52,7 @@ const AddTask = () => {
         -Tasks Project
       </h2>
       <MainTask onAddTask={handleAddTask}></MainTask>
-
+      <h2>List Task</h2>
       <TaskList
         tasks={tasks}
         onChangeTask={handleChangeTask}

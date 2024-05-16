@@ -2,7 +2,7 @@ import "./App.css";
 import TravalUniverse from "./NestedArray/TravalUniverse";
 import Universe from "./NormalizedArray/Universe";
 import Accordion from "./accordion/Accordion";
-import AddTask from "./statelLogic/AddTask";
+import AddTask from "./stateLogic/AddTask";
 
 function App() {
   return (

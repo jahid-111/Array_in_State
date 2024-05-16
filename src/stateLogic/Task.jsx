@@ -4,7 +4,7 @@ const Task = ({ task, onChangeTask, onDeleteTask }) => {
   const [isEdit, setIsEditing] = useState(false);
 
   let taskContent;
-
+  console.log(isEdit);
   if (isEdit) {
     taskContent = (
       <>
